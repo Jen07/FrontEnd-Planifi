@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+
 const Sidebar = () => {
      return (
           <div className="container-fluid">
@@ -7,13 +9,13 @@ const Sidebar = () => {
                          <div className="position-sticky pt-3">
                               <ul className="nav flex-column">
                                    <li className="nav-item">
-                                        <Link to={"/dashboard"} className="nav-link active" aria-current="page" >
+                                        <Link to={"/home/configuraciones"} className="nav-link text-light" aria-current="page" >
                                              <span data-feather="home"></span>
                                              Dashboard
                                         </Link>
                                    </li>
                                    <li className="nav-item">
-                                        <Link to={"/usuarios"} className="nav-link text-light" >
+                                        <Link to={"/home/configuraciones"} className="nav-link text-light" >
                                              <span data-feather="file"></span>
                                              Usuarios
                                         </Link>
@@ -30,7 +32,7 @@ const Sidebar = () => {
                                              Archivos
                                         </Link>
                                    </li>
-        
+
                                    <li className="nav-item">
                                         <Link to={"/login"} className="nav-link text-light" >
                                              <span data-feather="users"></span>

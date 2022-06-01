@@ -12,7 +12,7 @@ const Configuraciones = () => {
      const { GetConfiguration, listConfig } = useConfiguration();
 
      useEffect(() => {
-          GetConfiguration();
+          // GetConfiguration();
 
      }, [])
 
@@ -25,8 +25,8 @@ const Configuraciones = () => {
                          <Link to={"/home/variables"}
                               id="btn__registrarse"
                               className="btn btn-primary"><i className="fa-solid fa-square-plus fa-2x"></i></Link>
-                               <br></br>
-                               <br></br>
+                         <br></br>
+                         <br></br>
                          <h3 className="title">Lista Configuraciones</h3>
                          <br></br>
                          <table className="table table-hover">

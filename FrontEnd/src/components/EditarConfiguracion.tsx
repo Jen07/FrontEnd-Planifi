@@ -6,12 +6,14 @@ import { useState, useEffect } from 'react';
 
 import useConfiguration from '../hooks/useConfiguration';
 import { Link, useNavigate } from 'react-router-dom';
+import Alert from '../Alertas/Alerta';
+import useAlertas from '../hooks/useAlertas';
 
 const EditConfiguracion = () => {
 
      const redireccionar = useNavigate();
 
-     const [valido, Alerta] = useState(false);
+     const {AlertSuccess, setStateAlerta, valido} = useAlertas();
 
      const { configuracionEdit, UpdateConfiguration } = useConfiguration();
 
@@ -27,14 +29,12 @@ const EditConfiguracion = () => {
 
      const handleSubmit = e => {
           e.preventDefault();
-
           //Validar formulario
           if (config.cantidadBloques.trim() === '' || config.variableSistema.trim() === '') {
-               Alerta(true);
-
+               setStateAlerta(true);
                return;
           }
-          Alerta(false);
+          setStateAlerta(false);
           //Guardar Registro actualizado en mongo
           UpdateConfiguration(config);
           redireccionar("/home/Configuraciones");
@@ -75,19 +75,20 @@ const EditConfiguracion = () => {
                                              className="form-control" />
                                    </div>
 
-                                   <div className="row">
-                                        <div className="col-10">
-                                             <button type="submit" className="btn btn-primary"> <i className="fa-solid fa-floppy-disk"></i> Guardar</button>
+                                   <div className="flex-padre">
+                                        <div className="flex-hijo">
+                                             <button type="submit" className="btn btn-primary expand"> <i className="fa-solid fa-floppy-disk"></i> Guardar</button>
                                         </div>
-                                        <div className="col-2">
-                                             <Link to={"/home/configuraciones"} className="btn btn-warning m-1"><i className="fa-solid fa-circle-arrow-left"></i>  Volver</Link>
+                                        <div className="flex-hijo">
+                                             <Link to={"/home/configuraciones"} className="btn btn-warning expand"><i className="fa-solid fa-circle-arrow-left"></i>  Volver</Link>
                                         </div>
                                    </div>
 
                               </div>
-                              {valido ? <div className="alert alert-danger" role="alert">
-                                   Todos los campos son Obligatorios
-                              </div> : null}
+                              {
+                              valido ?
+                              <Alert>{'Campos Requeridos'}</Alert>: null
+                              }
                          </form>
                     </div>
                </div>

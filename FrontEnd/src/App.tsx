@@ -10,10 +10,12 @@ import routes from '../src/config/route.config';
 import { isLogin } from '../src/config/storage';
 
 import {ArchivosProvider} from './context/ArchivosProvider';
+import { AlertasProvider } from './context/AlertasProvider';
 
 
 function App() {
   return (
+    <AlertasProvider>
     <UserProvider>
       <ConfigurationProvider>
         <ArchivosProvider>
@@ -39,6 +41,7 @@ function App() {
         </ArchivosProvider>
         </ConfigurationProvider>
     </UserProvider>
+    </AlertasProvider>
   );
 }
 
