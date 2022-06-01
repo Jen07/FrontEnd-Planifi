@@ -14,18 +14,20 @@ const Dropzone = () => {
      const { setStateAlerta, valido } = useAlertas();
 
      //Obtener contenido de Dropzone
-     const onDrop = useCallback((acceptedFiles, rejectFiles) => {
+     const onDrop = useCallback((acceptedFiles, fileRejections) => {
+        
           loadStateInsert(acceptedFiles);
           // listFilesInsert.length > 0 ? Alerta(false):null;
           if (listFilesInsert.length > 0) {
                setStateAlerta(false);
           }
-          console.log(rejectFiles);
+       
           //verArchivos();
+          
      }, [])
 
     useEffect(()=>{
-      console.log(listFilesInsert);
+         console.log(listFilesInsert);
     },[listFilesInsert])
      const verArchivos = () => {
 
@@ -52,7 +54,7 @@ const Dropzone = () => {
           }
      }
 
-     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({ onDrop });
+     const { getRootProps, getInputProps, isDragActive, acceptedFiles, fileRejections } = useDropzone({ onDrop });
 
      return (
           <Fragment>
@@ -107,22 +109,22 @@ const Dropzone = () => {
                               <li className="list-group-item list-group-item-action active bg-black2" aria-current="true">
                                    Lista de Archivos
                               </li>
-                              {/* {listFilesInsert.length === 0 ? 'Sin Archivos' : (listFilesInsert.map(archivo => (
+                              {listFilesInsert.length === 0 ? 'Sin Archivos' : (listFilesInsert.map(archivo => (
 
                                    <ListFile
                                         key={archivo.nombre}
                                         archivos={archivo}
                                    />
                               ))
-                              )} */}
+                              )}
 
-                              {listFilesInsert.length >0 && <div>
+                              {/* {listFilesInsert.length >0 && <div>
                                    {listFilesInsert.map((archivo, index)=>  
                                    <li className="list-group-item list-group-item-action"
                                    key={archivo.nombre}>{archivo.nombre} 
                                    </li>)
                               }
-                              </div>}
+                              </div>} */}
 
                          </div>
                     </div>
