@@ -1,0 +1,45 @@
+import Footer from '../src/shared/Footer';
+import Header from '../src/shared/Header';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sidebar from './components/sidebar';
+import { UserProvider } from './context/UserProvider';
+
+import { ConfigurationProvider } from './context/ConfigurationProvider';
+// @ts-ignore
+import routes from '../src/config/route.config';
+import { isLogin } from '../src/config/storage';
+
+import {ArchivosProvider} from './context/ArchivosProvider';
+
+
+function App() {
+  return (
+    <UserProvider>
+      <ConfigurationProvider>
+        <ArchivosProvider>
+          
+        <BrowserRouter>
+          {isLogin ? null :
+            <Header />}
+          
+            <Routes>
+              {routes.map(ruta => (
+                <Route
+                  key={ruta.path}
+                  path={ruta.path}
+                  element={<ruta.componente />}
+                />
+              ))}
+            </Routes>
+        
+          {/* <Footer /> */}
+          {isLogin ? null :
+            <Sidebar />}
+        </BrowserRouter>
+        </ArchivosProvider>
+        </ConfigurationProvider>
+    </UserProvider>
+  );
+}
+
+export default App;
