@@ -12,7 +12,7 @@ const Configuraciones = () => {
      const { GetConfiguration, listConfig } = useConfiguration();
 
      useEffect(() => {
-          // GetConfiguration();
+          GetConfiguration();
 
      }, [])
 

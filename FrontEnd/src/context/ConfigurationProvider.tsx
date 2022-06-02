@@ -16,7 +16,7 @@ const ConfigurationProvider = ({ children }) => {
      }
 
      const RegisterConfiguration = async (config: Configuration) => {
-          console.log(config);
+
           try {
              const {data} =await clienteAxios.post(`configuration`,config);
                listConfig.push(config);
@@ -29,7 +29,6 @@ const ConfigurationProvider = ({ children }) => {
      const GetConfiguration = async () =>{
           try {
                const {data} = await clienteAxios.get(`configuration`);
-               console.log(data);
                listConfigState(data);
             } catch (error) {
                  console.log(error);

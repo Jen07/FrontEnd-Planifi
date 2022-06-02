@@ -34,10 +34,9 @@ const AgregarVariable = () => {
           }
           setStateAlerta(false);
           //Insertar en mongo
-          //RegisterConfiguration(config);
+          RegisterConfiguration(config);
           redireccionar("/home/Configuraciones");
-          console.log("HOlaaaaaaaaaaaaaa");
-          // AlertSweet();
+         
      }
      return (
           <Fragment>

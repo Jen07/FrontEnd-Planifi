@@ -49,6 +49,10 @@ class Archivo1 {
 export default Archivo1;
 
 export interface Archivo {
-  nombre: string;
-  archivo: string;
+  owner: '';
+  typeOfFile: '';
+  date: '';
+  size: '';
+  name: '';
+  base64: '';
 }

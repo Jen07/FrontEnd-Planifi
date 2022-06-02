@@ -3,32 +3,34 @@ import { useNavigate } from "react-router-dom";
 
 
 const Configuracion = ({ archivo }) => {
+  
+      const {deleteFile} = useArchivo();
+
 
      const descargarArchivo = (id: string) => {
-
+         
      }
-     const verArchivo = (id: string) => {
-
+     const eliminarArchivo = (id: string) => {
+         // alert(id);
+      deleteFile(id);
      };
-
-
      return (
           <tr>
-               <td className='text-center'>{archivo.nombre}</td>
+               <td className='text-center'>{archivo.name}</td>
                <td className='text-center'>
                     <button
-                         className="btn btn-info m-2"
+                         className="btn btn-warning text-light m-2"
                          type="button"
-                         onClick={() => verArchivo(archivo)}
+                         onClick={() => descargarArchivo(archivo)}
                     >
-                         <i className="fa-solid fa-eye fa-lg" ></i>
+                         <i className="fa-solid fa-file-arrow-down"></i>
                     </button>
                     <button
                          type="button"
                          className="btn btn-danger"
-                         onClick={() => descargarArchivo(archivo)}
+                         onClick={() => eliminarArchivo(archivo.id)}
                     >
-                         <i className="fa-solid fa-file-arrow-down"></i>
+                         <i className="fa-solid fa-trash-can"></i>
                     </button>
                </td>
           </tr>

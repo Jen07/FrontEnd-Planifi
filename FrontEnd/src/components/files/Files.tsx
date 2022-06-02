@@ -7,7 +7,11 @@ import File from '../files/File';
 
 const Files = () => {
 
-     const { listFiles } = useArchivos();
+     const { listFiles, listFilesMemPool, getFiles } = useArchivos();
+
+      useEffect(() =>{
+          getFiles();
+      },[])
      return (
           <Fragment>
                <Header />
@@ -29,10 +33,10 @@ const Files = () => {
                                    </tr>
                               </thead>
                               <tbody>
-                                   {listFiles.length === 0 ? 'No hay Archivos' : (listFiles.map(file => (
+                                   {listFilesMemPool.length === 0 ? 'No hay Archivos' : (listFilesMemPool.map(file => (
 
                                         <File
-                                             key={file.nombre}
+                                             key={file.id}
                                              archivo={file}
                                         />
                                    ))
