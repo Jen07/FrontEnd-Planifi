@@ -26,7 +26,7 @@ const AgregarVariable = () => {
 
      const handleSubmit = e => {
           e.preventDefault();
-          AlertSuccess('Hokaaaaa');
+         
           //Validar formulario
           if (config.cantidadBloques.trim() === '' || config.variableSistema.trim() === '') {
                setStateAlerta(true);

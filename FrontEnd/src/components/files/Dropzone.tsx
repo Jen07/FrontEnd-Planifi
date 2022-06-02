@@ -1,30 +1,28 @@
 import { useState, useCallback, Fragment, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useArchivos from "../../hooks/useArchivos";
-import { Link, useNavigate } from "react-router-dom";
-import Alert from '../../Alertas/Alerta';
+import { Link, useHref, useNavigate } from "react-router-dom";
 import useAlertas from '../../hooks/useAlertas';
 import ListFile from "./ListFile";
-import Archivo1 from "../Models/Archivo.Model";
-import { Archivo } from "../Models/Archivo.Model";
+import Alert from "../../Alertas/Alerta";
+
 const Dropzone = () => {
 
      const redireccionar = useNavigate();
 
-     const { loadStateInsert, listFilesInsert, setListInsert, listFileName, RegisterFiles } = useArchivos();
+     const { loadStateInsert, listFilesInsert, listFilesStateInsert, RegisterFiles } = useArchivos();
+
+     const { AlertSuccess } = useAlertas()
 
      const { setStateAlerta, valido } = useAlertas();
 
      //Obtener contenido de Dropzone
      const onDrop = useCallback((acceptedFiles, fileRejections) => {
-
           console.log(acceptedFiles);
           loadStateInsert(acceptedFiles);
-          // listFilesInsert.length > 0 ? Alerta(false):null;
           if (listFilesInsert.length > 0) {
                setStateAlerta(false);
           }
-
           setLista(listFilesInsert);
      }, [])
 
@@ -34,13 +32,17 @@ const Dropzone = () => {
      const [lista, setLista] = useState([]);
 
      const registrarArchivos = () => {
-
-          lista.forEach((async file => {
-
-               await RegisterFiles(file);
-          }))
-
-          redireccionar('/home/Archivos');
+       
+          if(listFilesInsert.length === 0){
+               setStateAlerta(true);
+          }else{
+          lista.forEach(( file => {
+                RegisterFiles(file);
+          }));
+         // listFilesStateInsert(null);
+     AlertSuccess('Agregado Correctamente');
+        redireccionar('/home/Archivos');
+     }
      }
 
 

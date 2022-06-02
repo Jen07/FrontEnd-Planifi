@@ -47,7 +47,7 @@ const ArchivosProvider = ({ children }) => {
                     //archivoObj.nombre = nombre;
                     //archivoObj.archivo = arrayAuxiliar[1];
                     // console.log(archivoObj);
-                    listFilesInsert.push(new Archivo1('Christian', typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+                    listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
 
                    
                }
@@ -61,7 +61,7 @@ const ArchivosProvider = ({ children }) => {
           try {
          const { data }  =  await clienteAxios.post(`memPool`, file);
                   listFilesMemPool.push(file);
-                 loadFiles(data);
+                // loadFiles(data);
           } catch (error) {
                console.log(error);
           }
@@ -98,7 +98,8 @@ const ArchivosProvider = ({ children }) => {
                     getFiles,
                     listFilesMemPool,
                     deleteFile,
-                    setListInsert
+                    setListInsert,
+                    listFilesStateInsert
                }}
           >
                {children}

@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Sidebar = () => {
+
+     const navegar = useNavigate();
+
+     const logout = () => {
+          localStorage.removeItem('idUser');
+          navegar('/login');
+     }
      return (
           <div className="container-fluid">
                <div className="row">
@@ -34,10 +41,10 @@ const Sidebar = () => {
                                    </li>
 
                                    <li className="nav-item">
-                                        <Link to={"/login"} className="nav-link text-light" >
+                                        <li onClick={logout} className="nav-link text-light pointer" >
                                              <span data-feather="users"></span>
                                              Salir
-                                        </Link>
+                                        </li>
                                    </li>
                               </ul>
                          </div>

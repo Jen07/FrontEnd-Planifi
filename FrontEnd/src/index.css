@@ -228,3 +228,6 @@ flex-direction: column;
 .m-left{
 margin-left: 4px;
 }
+.pointer{
+  cursor: pointer;
+}

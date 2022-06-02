@@ -13,9 +13,8 @@ const Files = () => {
 
       useEffect(() =>{
           getFiles();
-           
-      
-      },[listFilesMemPool])
+      },[])
+
      return (
           <Fragment>
                <Header />
