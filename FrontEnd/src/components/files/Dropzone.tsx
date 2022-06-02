@@ -11,49 +11,35 @@ const Dropzone = () => {
 
      const redireccionar = useNavigate();
 
-     const { loadStateInsert, listFilesInsert,setListInsert, listFileName,RegisterFiles } = useArchivos();
+     const { loadStateInsert, listFilesInsert, setListInsert, listFileName, RegisterFiles } = useArchivos();
 
      const { setStateAlerta, valido } = useAlertas();
 
      //Obtener contenido de Dropzone
      const onDrop = useCallback((acceptedFiles, fileRejections) => {
-        
+
+          console.log(acceptedFiles);
           loadStateInsert(acceptedFiles);
           // listFilesInsert.length > 0 ? Alerta(false):null;
           if (listFilesInsert.length > 0) {
                setStateAlerta(false);
           }
-          
+
           setLista(listFilesInsert);
      }, [])
 
-    useEffect(()=>{
-    },[]);
+     useEffect(() => {
+     }, []);
 
-    const [lista, setLista] = useState([]);
+     const [lista, setLista] = useState([]);
 
      const registrarArchivos = () => {
-          
-          lista.forEach((async file=> {
-               
-             
-                 await   RegisterFiles(file);
+
+          lista.forEach((async file => {
+
+               await RegisterFiles(file);
           }))
 
-         // setListInsert(null);
-          
-           
-          // if (listFilesInsert.length == 0) {
-          //      setStateAlerta(true);
-          // } else {
-          //      //Registrar en Mongo
-          //      listFilesInsert.forEach(file => {
-          //       RegisterFiles(file);
-          //      })
-          //      setStateAlerta(false);
-          //      redireccionar('/home/Archivos');
-
-          // }
           redireccionar('/home/Archivos');
      }
 

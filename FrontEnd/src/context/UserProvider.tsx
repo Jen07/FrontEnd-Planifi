@@ -18,10 +18,10 @@ const UserProvider = ({ children }) => {
     const verifyCredentials = async (datos: AuthUser) => {
 
         const url = `user/${datos.userName}/${datos.password}`;
-        console.log(url);
+      
         try {
             const {data}  = await clienteAxios.get(url);
-            console.log(data[0]);
+            console.log(data);
             //setUser(data)
         } catch (error) {
             console.log(error);

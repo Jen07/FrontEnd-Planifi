@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
@@ -9,9 +9,13 @@ const Files = () => {
 
      const { listFiles, listFilesMemPool, getFiles } = useArchivos();
 
+     const [ tempList, setTempList ] = useState([]);
+
       useEffect(() =>{
           getFiles();
-      },[])
+           
+      
+      },[listFilesMemPool])
      return (
           <Fragment>
                <Header />
@@ -29,6 +33,7 @@ const Files = () => {
                               <thead className="bg-black2 text-light">
                                    <tr className="bg-black2 text-light">
                                         <th className='text-center' scope="col">Nombre Archivo</th>
+                                        <th className='text-center' scope="col">Tipo Archivo</th>
                                         <th className='text-center' scope="col">Acciones</th>
                                    </tr>
                               </thead>

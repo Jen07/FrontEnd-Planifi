@@ -60,7 +60,7 @@ const ArchivosProvider = ({ children }) => {
           
           try {
          const { data }  =  await clienteAxios.post(`memPool`, file);
-                  // listFilesMemPool.push(file);
+                  listFilesMemPool.push(file);
                  loadFiles(data);
           } catch (error) {
                console.log(error);
