@@ -24,26 +24,21 @@ const Dropzone = () => {
                setStateAlerta(false);
           }
           
+          setLista(listFilesInsert);
      }, [])
 
     useEffect(()=>{
     },[]);
 
+    const [lista, setLista] = useState([]);
+
      const registrarArchivos = () => {
           
-          listFilesInsert.forEach((file)=> {
+          lista.forEach((async file=> {
                
-              let  Archivo = {
-                    owner: file.owner,
-                    typeOfFile: file.typeOfFile,
-                    date: file.date,
-                    size: file.size,
-                    name: file.name,
-                    base64: file.base64
-                  }
-                   // console.log(file);
-                    RegisterFiles(Archivo);
-          })
+             
+                 await   RegisterFiles(file);
+          }))
 
          // setListInsert(null);
           

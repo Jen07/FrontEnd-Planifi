@@ -21,7 +21,7 @@ const Configuracion = ({ archivo }) => {
                     <button
                          className="btn btn-warning text-light m-2"
                          type="button"
-                         onClick={() => descargarArchivo(archivo)}
+                         onClick={()=>descargarArchivo(archivo)}
                     >
                          <i className="fa-solid fa-file-arrow-down"></i>
                     </button>

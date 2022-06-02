@@ -1,58 +1,62 @@
+
+
 class Archivo1 {
-  private owner: string;
-  private typeOfFile: string;
-  private date: string;
-  private size: string;
-  private name: string;
-  private base64: string;
+  private Owner: string;
+  private TypeOfFile: string;
+  private Date: string;
+  private Size: string;
+  private Name: string;
+  private Base64: string;
 
   constructor(
-    owner: string,
-    typeOfFile: string,
-    date: string,
-    size: string,
-    name: string,
-    base64: string
+    Owner: string,
+    TypeOfFile: string,
+    Date: string,
+    Size: string,
+    Name: string,
+    Base64: string
   ) {
-    this.owner = owner;
-    this.typeOfFile = typeOfFile;
-    this.date = date;
-    this.size = size;
-    this.name = name;
-    this.base64 = base64;
+    this.Owner = Owner;
+    this.TypeOfFile = TypeOfFile;
+    this.Date = Date;
+    this.Size = Size;
+    this.Name = Name;
+    this.Base64 = Base64;
   }
 
+
   public getNombre() {
-    return this.name;
+    return this.Name;
   }
 
   public getBase64() {
-    return this.base64;
+    return this.Base64;
   }
 
   public getTipoArchivo() {
-    return this.typeOfFile;
+    return this.TypeOfFile;
   }
 
   public getSize() {
-    return this.size;
+    return this.Size;
   }
 
   public getPropietario() {
-    return this.owner;
+    return this.Owner;
   }
 
   public getFecha() {
-    return this.date;
+    return this.Date;
   }
 }
 export default Archivo1;
 
+
 export interface Archivo {
-  owner: '';
-  typeOfFile: '';
-  date: '';
-  size: '';
-  name: '';
-  base64: '';
+  Owner: '';
+  TypeOfFile: '';
+  Date: '';
+  Size: '';
+  Name: '';
+  Base64: '';
 }

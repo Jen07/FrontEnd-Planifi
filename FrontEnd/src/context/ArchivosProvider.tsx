@@ -1,9 +1,9 @@
-import { stringify } from 'querystring';
+
 import { useState, useEffect, createContext } from 'react';
 import { json } from 'stream/consumers';
 
-import Archivo1, { Archivo } from '../components/Models/Archivo.Model'
-
+import Archivo1 from '../components/Models/Archivo.Model'
+import Archivo3 from '../components/Models/Archivo.Model' 
 import clienteAxios from '../config/axios';
 
 
@@ -47,16 +47,21 @@ const ArchivosProvider = ({ children }) => {
                     //archivoObj.nombre = nombre;
                     //archivoObj.archivo = arrayAuxiliar[1];
                     // console.log(archivoObj);
-                    listFilesInsert.push(new Archivo1('Christian', typeOfFile, new Date().toLocaleTimeString(), size, name, base64[1]));
+                    listFilesInsert.push(new Archivo1('Christian', typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+
+                   
                }
           })
           listFilesState(listFilesInsert);
      }
+     const RegisterFiles = async (file: Archivo1) => {
+          console.log(file);
 
-     const RegisterFiles = async (file:Archivo) => {
+          
           try {
-                const { data }  =  await clienteAxios.post(`memPool`, file);
-                 listFilesMemPool.push(file);
+         const { data }  =  await clienteAxios.post(`memPool`, file);
+                  // listFilesMemPool.push(file);
+                 loadFiles(data);
           } catch (error) {
                console.log(error);
           }
