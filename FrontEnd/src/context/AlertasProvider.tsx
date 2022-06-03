@@ -15,7 +15,7 @@ const AlertasProvider = ({ children }) => {
      }
 
      const AlertSuccess = (mgs) => {
-          console.log("HOlaaaaaaaaaaaaaa");
+         
           Swal.fire({
                position: 'top-end',
                icon: 'success',
