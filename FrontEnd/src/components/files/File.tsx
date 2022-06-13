@@ -7,9 +7,10 @@ const Configuracion = ({ archivo }) => {
 
 
      const { deleteFile, checkAdd,checkDelete } = useArchivo();
-     
+
      const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
           if(evt.currentTarget.checked){
+               console.log(evt.target.value);
              checkAdd(evt.target.value);
           }else{
                checkDelete(evt.target.value);
@@ -52,7 +53,7 @@ const Configuracion = ({ archivo }) => {
                     <input
                          onChange={handleChange}
                          type="checkbox" className="form-check-input" name=''
-                         value={archivo.id}
+                         value={[archivo.base64, archivo.id]}
                     ></input>
                </td>
                <td className='text-center'>{archivo.name}</td>

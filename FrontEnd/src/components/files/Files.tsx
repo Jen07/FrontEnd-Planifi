@@ -6,6 +6,8 @@ import useArchivos from '../../hooks/useArchivos';
 import useArlertas from '../../hooks/useAlertas';
 import File from '../files/File';
 import Swal from 'sweetalert2';
+import {saveAs} from 'file-saver';
+var zip = require('jszip')();
 
 const Files = () => {
 
@@ -30,8 +32,8 @@ const Files = () => {
                confirmButtonText: 'Sí, eliminar todos!'
              }).then((result) => {
                if (result.isConfirmed) {
-                    listFilesCheck.forEach((aid:string) => {
-                         deletegroup(aid);
+                    listFilesCheck.forEach((aid:any) => {
+                         deletegroup(aid.id);
                     });
                }
                updateState();
@@ -47,7 +49,13 @@ deleteFile(aid);
      }
 
      const downloadSelected = () =>{
-         alert("Descargando");
+         listFilesCheck.forEach(file => {
+           zip.file(file.name, file.base64, {base64:true})
+         });
+         zip.generateAsync({type: 'blob'}).then(function(content){
+          saveAs(content, 'Archivos.zip')
+         })
+         zip = require('jszip');
      }
      return (
           <Fragment>
