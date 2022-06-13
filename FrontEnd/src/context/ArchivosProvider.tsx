@@ -3,7 +3,7 @@ import { useState, useEffect, createContext } from 'react';
 import { json } from 'stream/consumers';
 
 import Archivo1 from '../components/Models/Archivo.Model'
-import Archivo3 from '../components/Models/Archivo.Model' 
+import Archivo3 from '../components/Models/Archivo.Model'
 import clienteAxios from '../config/axios';
 
 
@@ -17,6 +17,31 @@ const ArchivosProvider = ({ children }) => {
      const [listFilesInsert, listFilesStateInsert] = useState([]);
 
      const [listFilesMemPool, loadFiles] = useState([]);
+
+     const [listFilesCheck, SetlistFilesStateDelete] = useState([]);
+
+     const [sizeList, setSizeList] = useState(0);
+
+     const checkAdd = (aid: string) => {
+          //  console.log(aid, 'ID DE ARCHIVO');
+          listFilesCheck.push(aid);
+          setSizeList(listFilesCheck.length);
+     }
+
+     const checkDelete = (aid: string) => {
+          let j = listFilesCheck.indexOf(aid);
+          listFilesCheck.splice(j);
+
+          if (listFilesCheck.length === 0) {
+               setSizeList(0);
+               //  setSizeList(listFilesCheck.length);
+          } else {
+               setSizeList(listFilesCheck.length);
+          }
+          //listFilesCheck.length == 0 ? setSizeList(0): null;
+     }
+
+
 
 
      const getTipoArchivo = (path: string) => {
@@ -49,7 +74,7 @@ const ArchivosProvider = ({ children }) => {
                     // console.log(archivoObj);
                     listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
 
-                   
+
                }
           })
           listFilesState(listFilesInsert);
@@ -57,11 +82,11 @@ const ArchivosProvider = ({ children }) => {
      const RegisterFiles = async (file: Archivo1) => {
           console.log(file);
 
-          
+
           try {
-         const { data }  =  await clienteAxios.post(`memPool`, file);
-                  listFilesMemPool.push(file);
-                // loadFiles(data);
+               const { data } = await clienteAxios.post(`memPool`, file);
+               listFilesMemPool.push(file);
+               // loadFiles(data);
           } catch (error) {
                console.log(error);
           }
@@ -71,20 +96,31 @@ const ArchivosProvider = ({ children }) => {
                await clienteAxios.delete(`memPool/${id}`);
                const filtredData = listFilesMemPool.filter(item => item.id !== id);
                loadFiles(filtredData);
+               setSizeList(0);
           } catch (error) {
                console.log(error);
           }
      }
+
+     const updateState = () => {
+
+               listFilesCheck.forEach((id) => {
+                    let aid = listFilesMemPool.indexOf(id);
+                    listFilesMemPool.splice(aid);
+               })
+
+
+     }
      const getFiles = async () => {
           try {
                const { data } = await clienteAxios.get(`memPool`);
-           
+
                loadFiles(data);
           } catch (error) {
                console.log(error);
           }
      }
-     const setListInsert = () =>{
+     const setListInsert = () => {
           listFilesStateInsert(null)
      }
      return (
@@ -99,7 +135,12 @@ const ArchivosProvider = ({ children }) => {
                     listFilesMemPool,
                     deleteFile,
                     setListInsert,
-                    listFilesStateInsert
+                    listFilesStateInsert,
+                    checkDelete,
+                    checkAdd,
+                    sizeList,
+                    listFilesCheck,
+                    updateState
                }}
           >
                {children}

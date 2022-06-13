@@ -231,3 +231,16 @@ margin-left: 4px;
 .pointer{
   cursor: pointer;
 }
+
+
+.d-padre{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+}
+.m-botton{
+  margin-bottom: 1rem;
+}
+.m-right{
+  margin-right: 1rem;
+}

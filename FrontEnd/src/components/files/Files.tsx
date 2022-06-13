@@ -3,31 +3,79 @@ import { Link } from 'react-router-dom';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
 import useArchivos from '../../hooks/useArchivos';
+import useArlertas from '../../hooks/useAlertas';
 import File from '../files/File';
+import Swal from 'sweetalert2';
 
 const Files = () => {
 
-     const { listFiles, listFilesMemPool, getFiles } = useArchivos();
+     const {listFilesMemPool, getFiles, sizeList, deleteFile,listFilesCheck,updateState } = useArchivos();
 
-     const [ tempList, setTempList ] = useState([]);
+     const {AlertSuccess} = useArlertas();
 
-      useEffect(() =>{
+     useEffect(() => {
           getFiles();
-      },[])
+     }, [])
 
+
+     const deleteSelected = () =>{
+          Swal.fire({
+               title: `¿Estas Seguro de eliminar ${sizeList} Archivos?`,
+               text: `Esta opcion es irreversible`,
+               icon: 'question',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               cancelButtonText: 'Cancelar',
+               confirmButtonText: 'Sí, eliminar todos!'
+             }).then((result) => {
+               if (result.isConfirmed) {
+                    listFilesCheck.forEach((aid:string) => {
+                         deletegroup(aid);
+                    });
+               }
+               updateState();
+             })
+          if( sizeList === 0){
+               AlertSuccess('Archivos eliminados Correctamente');
+          }
+          //sizeList == 0 ? AlertSuccess('Archivos eliminados Correctamente'): '';
+     }
+
+     const deletegroup = (aid: string)=>{
+deleteFile(aid);
+     }
+
+     const downloadSelected = () =>{
+         alert("Descargando");
+     }
      return (
           <Fragment>
                <Header />
                <Sidebar />
                <div className="container1 p-5">
                     <div className='container'>
-                         <Link to={"/home/RegistrarArchivo"}
-                              id="btn__registrarse"
-                              className="btn btn-primary"><i className="fa-solid fa-square-plus fa-2x"></i></Link>
-                         <br></br>
-                         <br></br>
-                         <h3 className="title">Lista Archivos</h3>
-                         <br></br>
+                         <div className="d-padre m-botton">
+                              <div className='d-hijo'>
+                                   <Link to={"/home/RegistrarArchivo"}
+                                        id="btn__registrarse"
+                                        className="btn btn-primary"><i className="fa-solid fa-square-plus fa-2x"></i></Link>
+                              </div>
+
+                              <div className='d-hijo'>
+                                   
+                              {sizeList >= 2?(
+                                  <button onClick={deleteSelected} className='btn btn-danger m-right'>Eliminar Seleccionados</button >
+                                  ): null}
+                                    {sizeList >= 2?(
+                                  <button onClick={downloadSelected} className='btn btn-warning text-light'>Descargar Seleccionados</button>
+                                  ): null}
+                              </div>
+
+                         </div>
+
+
+
                          <table className="table table-hover">
                               <thead className="bg-black2 text-light">
                                    <tr className="bg-black2 text-light">

@@ -40,4 +40,11 @@ content: "\fa-solid fa-file-circle-plus";
     justify-content: center;
 }
 
+.d-padre{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+}
+
+
 

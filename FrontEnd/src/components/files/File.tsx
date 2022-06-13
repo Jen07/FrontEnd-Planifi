@@ -6,29 +6,15 @@ import { useState } from 'react';
 const Configuracion = ({ archivo }) => {
 
 
-     const { deleteFile } = useArchivo();
-
-     /** */
-
-     // const [isChecked, setIsChecked] = useState(false);
-     const [listFilesCheck, SetlistFilesStateDelete] = useState([]);
-     //const listFilesCheck2=[];
-
+     const { deleteFile, checkAdd,checkDelete } = useArchivo();
+     
      const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-          //setIsChecked(!isChecked);
           if(evt.currentTarget.checked){
-             console.log("agrego: ", evt.target.value);
-             listFilesCheck.push(evt.target.value);
+             checkAdd(evt.target.value);
           }else{
-              var j = listFilesCheck.indexOf(evt.target.value);
-               listFilesCheck.splice(j);
-               console.log("elimino");
+               checkDelete(evt.target.value);
           }
-          SetlistFilesStateDelete(listFilesCheck);
-          console.log("tamaño: ", listFilesCheck.length);
-           console.log(listFilesCheck);
      }
-     /** */
 
      const descargarArchivo = (file: any) => {
 
