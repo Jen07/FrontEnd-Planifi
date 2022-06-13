@@ -78,7 +78,7 @@ const ArchivosProvider = ({ children }) => {
      const getFiles = async () => {
           try {
                const { data } = await clienteAxios.get(`memPool`);
-              // console.log(data);
+           
                loadFiles(data);
           } catch (error) {
                console.log(error);

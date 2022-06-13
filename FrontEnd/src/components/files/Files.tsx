@@ -31,6 +31,7 @@ const Files = () => {
                          <table className="table table-hover">
                               <thead className="bg-black2 text-light">
                                    <tr className="bg-black2 text-light">
+                                        <th className='text-center' scope="col">Selected</th>
                                         <th className='text-center' scope="col">Nombre Archivo</th>
                                         <th className='text-center' scope="col">Tipo Archivo</th>
                                         <th className='text-center' scope="col">Acciones</th>
