@@ -1,4 +1,4 @@
-import Footer from '../src/shared/Footer';
+// import Footer from '../src/shared/Footer';
 import Header from '../src/shared/Header';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from './components/sidebar';

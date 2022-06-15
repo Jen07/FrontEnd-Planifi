@@ -94,8 +94,10 @@ const ArchivosProvider = ({ children }) => {
      const deleteFile = async (id: string) => {
           try {
                await clienteAxios.delete(`memPool/${id}`);
-               const filtredData = listFilesMemPool.filter(item => item.id !== id);
-               loadFiles(filtredData);
+             //  const filtredData = listFilesMemPool.filter(item => item.id !== id);
+               let aid = listFilesMemPool.indexOf(id);
+               listFilesMemPool.splice(aid);
+            //   loadFiles(filtredData);
                setSizeList(0);
           } catch (error) {
                console.log(error);
@@ -103,13 +105,10 @@ const ArchivosProvider = ({ children }) => {
      }
 
      const updateState = () => {
-
                listFilesCheck.forEach((id) => {
                     let aid = listFilesMemPool.indexOf(id);
                     listFilesMemPool.splice(aid);
                })
-
-
      }
      const getFiles = async () => {
           try {

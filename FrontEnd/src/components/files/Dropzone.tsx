@@ -103,22 +103,12 @@ const Dropzone = () => {
                                    Lista de Archivos
                               </li>
                               {listFilesInsert.length === 0 ? 'Sin Archivos' : (listFilesInsert.map(archivo => (
-
                                    <ListFile
-                                        key={archivo.id}
+                                        key={archivo.Date}
                                         archivos={archivo}
                                    />
                               ))
                               )}
-
-                              {/* {listFilesInsert.length >0 && <div>
-                                   {listFilesInsert.map((archivo, index)=>  
-                                   <li className="list-group-item list-group-item-action"
-                                   key={archivo.nombre}>{archivo.nombre} 
-                                   </li>)
-                              }
-                              </div>} */}
-
                          </div>
                     </div>
                </div>

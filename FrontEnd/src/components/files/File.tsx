@@ -10,6 +10,7 @@ const Configuracion = ({ archivo }) => {
 
      const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
           if(evt.currentTarget.checked){
+
                console.log(evt.target.value);
              checkAdd(evt.target.value);
           }else{
@@ -53,7 +54,7 @@ const Configuracion = ({ archivo }) => {
                     <input
                          onChange={handleChange}
                          type="checkbox" className="form-check-input" name=''
-                         value={[archivo.base64, archivo.id]}
+                         value={archivo}
                     ></input>
                </td>
                <td className='text-center'>{archivo.name}</td>
@@ -62,15 +63,13 @@ const Configuracion = ({ archivo }) => {
                     <button
                          className="btn btn-warning text-light m-2"
                          type="button"
-                         onClick={() => descargarArchivo(archivo)}
-                    >
+                         onClick={() => descargarArchivo(archivo)}>
                          <i className="fa-solid fa-file-arrow-down"></i>
                     </button>
                     <button
                          type="button"
                          className="btn btn-danger"
-                         onClick={() => eliminarArchivo(archivo.id)}
-                    >
+                         onClick={() => eliminarArchivo(archivo.id)}>
                          <i className="fa-solid fa-trash-can"></i>
                     </button>
                </td>

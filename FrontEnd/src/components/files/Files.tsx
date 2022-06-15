@@ -15,10 +15,10 @@ const Files = () => {
 
      const {AlertSuccess} = useArlertas();
 
+
      useEffect(() => {
           getFiles();
      }, [])
-
 
      const deleteSelected = () =>{
           Swal.fire({
@@ -48,8 +48,12 @@ const Files = () => {
 deleteFile(aid);
      }
 
+     
      const downloadSelected = () =>{
          listFilesCheck.forEach(file => {
+
+         
+
            zip.file(file.name, file.base64, {base64:true})
          });
          zip.generateAsync({type: 'blob'}).then(function(content){
@@ -94,14 +98,9 @@ deleteFile(aid);
                                    </tr>
                               </thead>
                               <tbody>
-                                   {listFilesMemPool.length === 0 ? 'No hay Archivos' : (listFilesMemPool.map(file => (
-
-                                        <File
-                                             key={file.id}
-                                             archivo={file}
-                                        />
-                                   ))
-                                   )}
+                                   {listFilesMemPool.length===0?'No hay Archivos':(listFilesMemPool.map((file:any)=>(
+                                        <File key={file.id} archivo={file}/>
+                                   )))}
                               </tbody>
                          </table>
                     </div>
