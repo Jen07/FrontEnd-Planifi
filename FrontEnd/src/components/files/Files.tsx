@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
@@ -11,14 +11,13 @@ var zip = require('jszip')();
 
 const Files = () => {
 
-     const { listFilesMemPool, getFiles, sizeList, deleteFile, listFilesCheck, updateState } = useArchivos();
+     const { listFilesMemPool, getFiles, sizeList, deleteFile, listFilesCheck, updateState,setListCheck, setIsChecked,isChecked } = useArchivos();
 
      const { AlertSuccess } = useArlertas();
 
-
      useEffect(() => {
           getFiles();
-     }, [])
+     }, [listFilesMemPool])
 
      const deleteSelected = () => {
           Swal.fire({
@@ -46,6 +45,7 @@ const Files = () => {
 
      const deletegroup = (aid: string) => {
           deleteFile(aid);
+          setListCheck();
      }
 
 
@@ -60,6 +60,9 @@ const Files = () => {
                saveAs(content, 'Archivos.zip')
           })
           zip = require('jszip')();
+          setListCheck();
+          //setIsChecked(false);
+          //setIsChecked(!isChecked);
      }
 
 

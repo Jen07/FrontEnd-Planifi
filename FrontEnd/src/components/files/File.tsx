@@ -7,7 +7,7 @@ import useAlertas from '../../hooks/useAlertas';
 const Configuracion = ({ archivo }) => {
 
 
-     const { deleteFile, checkAdd, checkDelete } = useArchivo();
+     const { deleteFile, checkAdd, checkDelete, sizeList, isChecked,setIsChecked } = useArchivo();
 
      const { AlertSuccess } = useAlertas();
 
@@ -17,6 +17,7 @@ const Configuracion = ({ archivo }) => {
                checkAdd(evt.target.value);
           } else {
                checkDelete(evt.target.value);
+
           }
      }
 
@@ -68,7 +69,7 @@ const Configuracion = ({ archivo }) => {
      return (
           <tr>
                <td className='text-center'>
-                    <input
+                    <input 
                          onChange={handleChange}
                          type="checkbox" className="form-check-input" name=''
                          value={archivo.id}
@@ -83,12 +84,19 @@ const Configuracion = ({ archivo }) => {
                          onClick={() => descargarArchivo(archivo)}>
                          <i className="fa-solid fa-file-arrow-down"></i>
                     </button>
-                    <button
+                    {sizeList >1? 
+                    <button  disabled={true}
                          type="button"
                          className="btn btn-danger"
                          onClick={() => eliminarArchivo(archivo)}>
                          <i className="fa-solid fa-trash-can"></i>
-                    </button>
+                    </button>: 
+                    <button 
+                         type="button"
+                         className="btn btn-danger"
+                         onClick={() => eliminarArchivo(archivo)}>
+                         <i className="fa-solid fa-trash-can"></i>
+                    </button>}      
                </td>
           </tr>
      );

@@ -13,19 +13,17 @@ const ArchivosContext = createContext(null);
 const ArchivosProvider = ({ children }) => {
 
 
-
-
      const [listFiles, listFilesState] = useState([]);
 
      const [listFilesInsert, listFilesStateInsert] = useState([]);
-
-     const [value, setValueInsert] = useState([]);
 
      const [listFilesMemPool, loadFiles] = useState([]);
 
      const [listFilesCheck, SetlistFilesStateDelete] = useState([]);
 
      const [sizeList, setSizeList] = useState(0);
+
+     const [isChecked, setIsChecked] = useState(false);
 
      const checkAdd = (aid: string) => {
           listFilesCheck.push(aid);
@@ -74,7 +72,8 @@ const ArchivosProvider = ({ children }) => {
                     //archivoObj.nombre = nombre;
                     //archivoObj.archivo = arrayAuxiliar[1];
 
-                    listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+                    listFilesInsert.push(new Archivo1(sessionStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+
                     listFilesStateInsert([...listFilesInsert]);
                     // listFilesStateInsert([...listFilesInsert,new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1])]);
 
@@ -98,11 +97,12 @@ const ArchivosProvider = ({ children }) => {
      const deleteFile = async (id: string) => {
           try {
                await clienteAxios.delete(`memPool/${id}`);
-               const filtredData = listFilesMemPool.filter(item => item.id !== id);
-               let aid = listFilesMemPool.indexOf(id);
-               listFilesMemPool.splice(aid);
-               loadFiles(filtredData);
-               setSizeList(0);
+          //     // let aid = listFilesMemPool.indexOf(id);
+          //    //  listFilesMemPool.splice(aid);
+          //      //const newFile = listFilesMemPool.filter(item => item.id !== id);
+          //     //loadFiles(filtredData);
+          //     loadFiles([...listFilesMemPool]);
+              setSizeList(0);
           } catch (error) {
                console.log(error);
           }
@@ -124,7 +124,10 @@ const ArchivosProvider = ({ children }) => {
           }
      }
      const setListInsert = () => {
-          listFilesStateInsert(null)
+          listFilesStateInsert([]);
+     }
+     const setListCheck = () =>{
+          SetlistFilesStateDelete([]);
      }
      return (
           <ArchivosContext.Provider
@@ -143,7 +146,10 @@ const ArchivosProvider = ({ children }) => {
                     checkAdd,
                     sizeList,
                     listFilesCheck,
-                    updateState
+                    updateState,
+                    setListCheck,
+                    setIsChecked,
+                    isChecked
                }}
           >
                {children}

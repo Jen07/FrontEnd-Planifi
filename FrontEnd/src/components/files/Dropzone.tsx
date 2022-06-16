@@ -9,7 +9,7 @@ const Dropzone = () => {
 
      const redireccionar = useNavigate();
 
-     const { loadStateInsert, listFilesInsert, listFilesStateInsert, RegisterFiles } = useArchivos();
+     const { loadStateInsert, listFilesInsert, listFilesStateInsert, RegisterFiles,setListInsert } = useArchivos();
 
      const { AlertSuccess } = useAlertas();
 
@@ -39,6 +39,7 @@ const Dropzone = () => {
                     RegisterFiles(file);
                }));
                // listFilesStateInsert(null);
+               setListInsert();
                AlertSuccess('Agregado Correctamente');
                redireccionar('/home/Archivos');
           }

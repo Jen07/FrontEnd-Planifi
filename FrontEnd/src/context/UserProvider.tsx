@@ -21,7 +21,8 @@ const UserProvider = ({ children }) => {
 
         try {
             const { data } = await clienteAxios.get(url);
-            localStorage.setItem('idUser', data[0].id);
+            console.log(data);
+            sessionStorage.setItem('idUser', data[0].id);
 
             //setUser(data)
         } catch (error) {
