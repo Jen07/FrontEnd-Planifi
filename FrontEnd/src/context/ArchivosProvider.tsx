@@ -11,10 +11,10 @@ const ArchivosContext = createContext(null);
 
 
 const ArchivosProvider = ({ children }) => {
-  
 
 
-     
+
+
      const [listFiles, listFilesState] = useState([]);
 
      const [listFilesInsert, listFilesStateInsert] = useState([]);
@@ -28,7 +28,6 @@ const ArchivosProvider = ({ children }) => {
      const [sizeList, setSizeList] = useState(0);
 
      const checkAdd = (aid: string) => {
-          //  console.log(aid, 'ID DE ARCHIVO');
           listFilesCheck.push(aid);
           setSizeList(listFilesCheck.length);
      }
@@ -60,9 +59,9 @@ const ArchivosProvider = ({ children }) => {
      }
 
      const loadStateInsert = (acceptedFiles) => {
-          console.log(acceptedFiles);
+
           Array.from(acceptedFiles).forEach((archivo: any) => {
-               
+
                let reader = new FileReader();
                reader.readAsDataURL(archivo);
                reader.onload = function () {
@@ -74,25 +73,18 @@ const ArchivosProvider = ({ children }) => {
                     let size = archivo.size;
                     //archivoObj.nombre = nombre;
                     //archivoObj.archivo = arrayAuxiliar[1];
-                    // console.log(archivoObj);
-
-
 
                     listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
                     listFilesStateInsert([...listFilesInsert]);
                     // listFilesStateInsert([...listFilesInsert,new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1])]);
-              
 
-
-                 //   listFilesStateInsert(preState =>[...listFilesInsert,arch]);
+                    //   listFilesStateInsert(preState =>[...listFilesInsert,arch]);
 
                     // listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
 
-                    console.log(listFilesInsert);
-                   
                }
           })
-         // listFilesState(listFilesInsert);
+          // listFilesState(listFilesInsert);
      }
      const RegisterFiles = async (file: Archivo) => {
           try {
@@ -117,10 +109,10 @@ const ArchivosProvider = ({ children }) => {
      }
 
      const updateState = () => {
-               listFilesCheck.forEach((id) => {
-                    let aid = listFilesMemPool.indexOf(id);
-                    listFilesMemPool.splice(aid);
-               })
+          listFilesCheck.forEach((id) => {
+               let aid = listFilesMemPool.indexOf(id);
+               listFilesMemPool.splice(aid);
+          })
      }
      const getFiles = async () => {
           try {

@@ -10,12 +10,12 @@ const AlertasProvider = ({ children }) => {
      const [valido, Alerta] = useState(false);
 
 
-     const setStateAlerta = (boleano: boolean) =>{
+     const setStateAlerta = (boleano: boolean) => {
           Alerta(boleano);
      }
 
      const AlertSuccess = (mgs) => {
-         
+
           Swal.fire({
                position: 'top-end',
                icon: 'success',
@@ -39,6 +39,6 @@ const AlertasProvider = ({ children }) => {
 
 export {
      AlertasProvider,
-     
+
 }
 export default AlertasContext;

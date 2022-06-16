@@ -10,7 +10,7 @@ const UserContext = createContext(null)
 const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState([])
-        useEffect(() => {
+    useEffect(() => {
     })
 
     const [userR, registerState] = useState([]);
@@ -18,12 +18,11 @@ const UserProvider = ({ children }) => {
     const verifyCredentials = async (datos: AuthUser) => {
 
         const url = `user/${datos.userName}/${datos.password}`;
-      
+
         try {
-            const {data}  = await clienteAxios.get(url);
-            console.log(data);
-            localStorage.setItem('idUser',data[0].id);
-            
+            const { data } = await clienteAxios.get(url);
+            localStorage.setItem('idUser', data[0].id);
+
             //setUser(data)
         } catch (error) {
             console.log(error);
@@ -33,13 +32,10 @@ const UserProvider = ({ children }) => {
     const RegisterUser = async (datos: AuthUserRegister) => {
 
         const url = `user`;
-        console.log(url);
-        console.log(datos);
         try {
-            const {data}  = await clienteAxios.post(url,datos);
-            
+            const { data } = await clienteAxios.post(url, datos);
+
             registerState(data);
-            console.log(data[0]);
 
         } catch (error) {
             console.log(error);

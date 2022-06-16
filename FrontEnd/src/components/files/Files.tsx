@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
@@ -6,21 +6,21 @@ import useArchivos from '../../hooks/useArchivos';
 import useArlertas from '../../hooks/useAlertas';
 import File from '../files/File';
 import Swal from 'sweetalert2';
-import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 var zip = require('jszip')();
 
 const Files = () => {
 
-     const {listFilesMemPool, getFiles, sizeList, deleteFile,listFilesCheck,updateState } = useArchivos();
+     const { listFilesMemPool, getFiles, sizeList, deleteFile, listFilesCheck, updateState } = useArchivos();
 
-     const {AlertSuccess} = useArlertas();
+     const { AlertSuccess } = useArlertas();
 
 
      useEffect(() => {
           getFiles();
      }, [])
 
-     const deleteSelected = () =>{
+     const deleteSelected = () => {
           Swal.fire({
                title: `¿Estas Seguro de eliminar ${sizeList} Archivos?`,
                text: `Esta opcion es irreversible`,
@@ -30,37 +30,39 @@ const Files = () => {
                cancelButtonColor: '#d33',
                cancelButtonText: 'Cancelar',
                confirmButtonText: 'Sí, eliminar todos!'
-             }).then((result) => {
+          }).then((result) => {
                if (result.isConfirmed) {
-                    listFilesCheck.forEach((aid:any) => {
-                         deletegroup(aid.id);
+                    listFilesCheck.forEach((aid: any) => {
+                         deletegroup(aid);
                     });
                }
                updateState();
-             })
-          if( sizeList === 0){
+          })
+          if (sizeList === 0) {
                AlertSuccess('Archivos eliminados Correctamente');
           }
           //sizeList == 0 ? AlertSuccess('Archivos eliminados Correctamente'): '';
      }
 
-     const deletegroup = (aid: string)=>{
-           deleteFile(aid);
+     const deletegroup = (aid: string) => {
+          deleteFile(aid);
      }
 
-     
-     const downloadSelected = () =>{
-         listFilesCheck.forEach(file => {
 
-         
+     const downloadSelected = () => {
+          listFilesCheck.map((fileId) => {
+               let objectFile = listFilesMemPool.find(e => e.id === fileId);
+               let name = objectFile.name + "." + objectFile.typeOfFile;
+               zip.file(name, objectFile.base64, { base64: true });
+          })
 
-           zip.file(file.name, file.base64, {base64:true})
-         });
-         zip.generateAsync({type: 'blob'}).then(function(content){
-          saveAs(content, 'Archivos.zip')
-         })
-         zip = require('jszip');
+          zip.generateAsync({ type: 'blob' }).then(function (content) {
+               saveAs(content, 'Archivos.zip')
+          })
+          zip = require('jszip')();
      }
+
+
      return (
           <Fragment>
                <Header />
@@ -75,13 +77,13 @@ const Files = () => {
                               </div>
 
                               <div className='d-hijo'>
-                                   
-                              {sizeList >= 2?(
-                                  <button onClick={deleteSelected} className='btn btn-danger m-right'>Eliminar Seleccionados</button >
-                                  ): null}
-                                    {sizeList >= 2?(
-                                  <button onClick={downloadSelected} className='btn btn-warning text-light'>Descargar Seleccionados</button>
-                                  ): null}
+
+                                   {sizeList >= 2 ? (
+                                        <button onClick={deleteSelected} className='btn btn-danger m-right'>Eliminar Seleccionados</button >
+                                   ) : null}
+                                   {sizeList >= 2 ? (
+                                        <button onClick={downloadSelected} className='btn btn-warning text-light'>Descargar Seleccionados</button>
+                                   ) : null}
                               </div>
 
                          </div>
@@ -98,8 +100,8 @@ const Files = () => {
                                    </tr>
                               </thead>
                               <tbody>
-                                   {listFilesMemPool.length===0?'No hay Archivos':(listFilesMemPool.map((file:any)=>(
-                                        <File key={file.id} archivo={file}/>
+                                   {listFilesMemPool.length === 0 ? 'No hay Archivos' : (listFilesMemPool.map((file: any) => (
+                                        <File key={file.id} archivo={file} />
                                    )))}
                               </tbody>
                          </table>

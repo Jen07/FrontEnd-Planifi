@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import Header from '../shared/Header';
-import Footer from '../shared/Footer';
 import Sidebar from './sidebar';
 import { useState, useEffect } from 'react';
 import useConfiguration from '../hooks/useConfiguration';
@@ -13,7 +12,7 @@ const AgregarVariable = () => {
 
      const { RegisterConfiguration } = useConfiguration();
 
-     const { AlertSuccess, setStateAlerta, valido} = useAlertas();
+     const { AlertSuccess, setStateAlerta, valido } = useAlertas();
 
      const [config, insertConfig] = useState({
           cantidadBloques: '',
@@ -21,12 +20,12 @@ const AgregarVariable = () => {
      });
 
      useEffect(() => {
-          
+
      }, [])
 
      const handleSubmit = e => {
           e.preventDefault();
-         
+
           //Validar formulario
           if (config.cantidadBloques.trim() === '' || config.variableSistema.trim() === '') {
                setStateAlerta(true);
@@ -37,7 +36,7 @@ const AgregarVariable = () => {
           RegisterConfiguration(config);
           AlertSuccess('Configuración agregada Correctamente');
           redireccionar("/home/Configuraciones");
-         
+
      }
      return (
           <Fragment>
@@ -85,8 +84,8 @@ const AgregarVariable = () => {
 
                               </div>
                               {
-                              valido ?
-                              <Alert>{'Campos Requeridos'}</Alert>: null
+                                   valido ?
+                                        <Alert>{'Campos Requeridos'}</Alert> : null
                               }
                          </form>
                     </div>

@@ -1,9 +1,8 @@
-import { useState, useCallback, Fragment, useEffect } from "react";
+import { useCallback, Fragment, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useArchivos from "../../hooks/useArchivos";
-import { Link, useHref, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAlertas from '../../hooks/useAlertas';
-import ListFile from "./ListFile";
 import Alert from "../../Alertas/Alerta";
 
 const Dropzone = () => {
@@ -18,43 +17,46 @@ const Dropzone = () => {
 
      //Obtener contenido de Dropzone
      const onDrop = useCallback((acceptedFiles, fileRejections) => {
-         // console.log(acceptedFiles);
+     
           loadStateInsert(acceptedFiles);
-          
+
           if (listFilesInsert.length > 0) {
                setStateAlerta(false);
-          }else{
-            
+          } else {
+
           }
      }, [listFilesInsert])
 
      useEffect(() => {
      }, []);
-     
+
      const registrarArchivos = () => {
-       
-          if(listFilesInsert.length === 0){
+
+          if (listFilesInsert.length === 0) {
                setStateAlerta(true);
-          }else{
-               listFilesInsert.forEach(( file => {
-                RegisterFiles(file);
-          }));
-         // listFilesStateInsert(null);
-     AlertSuccess('Agregado Correctamente');
-        redireccionar('/home/Archivos');
+          } else {
+               listFilesInsert.forEach((file => {
+                    RegisterFiles(file);
+               }));
+               // listFilesStateInsert(null);
+               AlertSuccess('Agregado Correctamente');
+               redireccionar('/home/Archivos');
+          }
      }
-     }
 
 
 
-     const { getRootProps, getInputProps, isDragActive, acceptedFiles, fileRejections } = useDropzone({ onDrop, accept:{'image/png':['.png'],
-             'image/jpeg':['.png'],
-             'aplication/pdf':['.pdf'],
-             'application/vnd.openxmlformats-officedocument.wordprocessingml.document/':['.docx'],
-             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':['.xlsx'],
-             'text/plain':['.txt'],
-             'application/vnd.openxmlformats-officedocument.presentationml.presentation':['.pptx']
-             } });
+     const { getRootProps, getInputProps, isDragActive, acceptedFiles, fileRejections } = useDropzone({
+          onDrop, accept: {
+               'image/png': ['.png'],
+               'image/jpeg': ['.png'],
+               'aplication/pdf': ['.pdf'],
+               'application/vnd.openxmlformats-officedocument.wordprocessingml.document/': ['.docx'],
+               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+               'text/plain': ['.txt'],
+               'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.pptx']
+          }
+     });
 
      return (
           <Fragment>
@@ -104,11 +106,11 @@ const Dropzone = () => {
                               <li className="list-group-item list-group-item-action active bg-black2" aria-current="true">
                                    Lista de Archivos
                               </li>
-                              {(listFilesInsert.map((archivo:any )=> (
-                                  <p>{archivo.Name}</p>
-                                   
+                              {(listFilesInsert.map((archivo: any) => (
+                                   <p>{archivo.Name}</p>
+
                               ))
-                              )} 
+                              )}
 
                          </div>
                     </div>

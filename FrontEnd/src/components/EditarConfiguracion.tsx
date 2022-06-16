@@ -13,7 +13,7 @@ const EditConfiguracion = () => {
 
      const redireccionar = useNavigate();
 
-     const {AlertSuccess, setStateAlerta, valido} = useAlertas();
+     const { AlertSuccess, setStateAlerta, valido } = useAlertas();
 
      const { configuracionEdit, UpdateConfiguration } = useConfiguration();
 
@@ -86,8 +86,8 @@ const EditConfiguracion = () => {
 
                               </div>
                               {
-                              valido ?
-                              <Alert>{'Campos Requeridos'}</Alert>: null
+                                   valido ?
+                                        <Alert>{'Campos Requeridos'}</Alert> : null
                               }
                          </form>
                     </div>

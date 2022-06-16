@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import LoginContext from '../context/UserProvider'
 
-const useRegister = ( )=>{
+const useRegister = () => {
     return useContext(LoginContext)
 }
 

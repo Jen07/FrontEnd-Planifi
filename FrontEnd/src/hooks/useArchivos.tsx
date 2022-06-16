@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ArchivosContext from '../context/ArchivosProvider';
 
-const useArchivos = ( ) =>{
+const useArchivos = () => {
     return useContext(ArchivosContext)
 }
 

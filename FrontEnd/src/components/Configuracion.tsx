@@ -22,7 +22,6 @@ const Configuracion = ({ config }) => {
 
      const confirmarEliminar = (config: any) => {
 
-          console.log(config);
           Swal.fire({
                title: `¿Estas Seguro de eliminar la configuración?`,
                text: `Esta opcion es irreversible`,

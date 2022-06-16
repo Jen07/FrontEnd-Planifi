@@ -1,5 +1,4 @@
-import React, { Fragment, useState , useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Fragment} from 'react';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
 import Dropzone from './Dropzone';
@@ -12,7 +11,7 @@ const FileRegister = () => {
                     <div className="text-center">
                          <p>Agregar Archivos</p>
                     </div>
-                     <Dropzone/>
+                    <Dropzone />
                </div>
           </Fragment>
      );

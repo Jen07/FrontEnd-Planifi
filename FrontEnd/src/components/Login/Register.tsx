@@ -2,12 +2,11 @@ import React, { Fragment, useState } from 'react';
 import useUser from '../../hooks/useRegister';
 import { Link, useNavigate } from "react-router-dom";
 import css from './login.module.css';
-import axios from 'axios';
 
 const Register = () => {
 
      const redireccionar = useNavigate();
-      const { RegisterUser } = useUser();
+     const { RegisterUser } = useUser();
 
      const [InputValues, setInputValues] = useState({
           userName: '',
@@ -21,7 +20,7 @@ const Register = () => {
      const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
           evt.preventDefault();
           //Validaciones
-          RegisterUser(InputValues); 
+          RegisterUser(InputValues);
           resetInputField();
           redireccionar('/login');
      }
@@ -33,9 +32,9 @@ const Register = () => {
                lastName: '',
                mail: '',
                birthDay: '',
-               password: '' 
+               password: ''
           });
-        };
+     };
 
      const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
           setInputValues({
@@ -43,7 +42,7 @@ const Register = () => {
                [evt.target.name]: evt.target.value
           })
      }
-    
+
 
      return (
           <Fragment>

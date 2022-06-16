@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import AlertasContext from '../context/AlertasProvider';
 
-const useArchivos = ( ) =>{
+const useArchivos = () => {
     return useContext(AlertasContext)
 }
 

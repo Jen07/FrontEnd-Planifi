@@ -13,23 +13,23 @@ import FileRegister from '../components/files/FileRegister';
 
 const routes = [
 
-     {path: '/', componente:Login, exact: true},
+     { path: '/', componente: Login, exact: true },
 
-     {path: '/login', componente:Login, exact: true},
+     { path: '/login', componente: Login, exact: true },
 
-     {path: '/register', componente: Register, exact:true},
+     { path: '/register', componente: Register, exact: true },
 
-     {path: '/home/variables', componente: AgregarVariable, exact:true},
+     { path: '/home/variables', componente: AgregarVariable, exact: true },
 
-     {path: '/home/configuraciones', componente: Configuraciones, exact:true},
+     { path: '/home/configuraciones', componente: Configuraciones, exact: true },
 
-     {path: '/home/ConfiguracionEditar', componente: EditConfiguracion, exact:true},
-     
-     {path: '/home/Archivos', componente: Files, exact:true},
+     { path: '/home/ConfiguracionEditar', componente: EditConfiguracion, exact: true },
 
-     {path: '/home/RegistrarArchivo', componente: FileRegister, exact:true},
-    
-     {path: '*', element: Redireccionar},
+     { path: '/home/Archivos', componente: Files, exact: true },
+
+     { path: '/home/RegistrarArchivo', componente: FileRegister, exact: true },
+
+     { path: '*', element: Redireccionar },
 ];
 
 

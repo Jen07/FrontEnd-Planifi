@@ -15,14 +15,10 @@ const AgregarVariable = () => {
     }
 
     const insertFiles = async () => {
-        console.log("entraaa");
-        console.log(selectedFile.length);
 
         const formData = new FormData();
         for (let index = 0; index < selectedFile.length; index++) {
             formData.append("files", selectedFile[index]);
-            console.log(selectedFile[index]);
-            console.log("base64");
             base64(selectedFile[index]);
         }
     }
@@ -32,7 +28,6 @@ const AgregarVariable = () => {
         reader.readAsDataURL(file);
         reader.onload = function () {
             var ba64 = reader.result;
-            console.log(ba64);
         }
     }
 

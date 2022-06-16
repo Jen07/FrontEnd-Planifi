@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ConfigurationContext from '../context/ConfigurationProvider';
 
-const useConfiguration = ( )=>{
+const useConfiguration = () => {
     return useContext(ConfigurationContext)
 }
 
