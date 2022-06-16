@@ -3,7 +3,7 @@ import { useState, useEffect, createContext } from 'react';
 import { json } from 'stream/consumers';
 
 import Archivo1 from '../components/Models/Archivo.Model'
-import Archivo3 from '../components/Models/Archivo.Model'
+import Archivo from '../components/Models/Archivo.Model'
 import clienteAxios from '../config/axios';
 
 
@@ -11,10 +11,15 @@ const ArchivosContext = createContext(null);
 
 
 const ArchivosProvider = ({ children }) => {
+  
 
+
+     
      const [listFiles, listFilesState] = useState([]);
 
      const [listFilesInsert, listFilesStateInsert] = useState([]);
+
+     const [value, setValueInsert] = useState([]);
 
      const [listFilesMemPool, loadFiles] = useState([]);
 
@@ -40,10 +45,6 @@ const ArchivosProvider = ({ children }) => {
           }
           //listFilesCheck.length == 0 ? setSizeList(0): null;
      }
-
-
-
-
      const getTipoArchivo = (path: string) => {
           let type = 0;
 
@@ -59,7 +60,9 @@ const ArchivosProvider = ({ children }) => {
      }
 
      const loadStateInsert = (acceptedFiles) => {
+          console.log(acceptedFiles);
           Array.from(acceptedFiles).forEach((archivo: any) => {
+               
                let reader = new FileReader();
                reader.readAsDataURL(archivo);
                reader.onload = function () {
@@ -72,17 +75,26 @@ const ArchivosProvider = ({ children }) => {
                     //archivoObj.nombre = nombre;
                     //archivoObj.archivo = arrayAuxiliar[1];
                     // console.log(archivoObj);
+
+
+
                     listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+                    listFilesStateInsert([...listFilesInsert]);
+                    // listFilesStateInsert([...listFilesInsert,new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1])]);
+              
 
 
+                 //   listFilesStateInsert(preState =>[...listFilesInsert,arch]);
+
+                    // listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+
+                    console.log(listFilesInsert);
+                   
                }
           })
-          listFilesState(listFilesInsert);
+         // listFilesState(listFilesInsert);
      }
-     const RegisterFiles = async (file: Archivo1) => {
-          console.log(file);
-
-
+     const RegisterFiles = async (file: Archivo) => {
           try {
                const { data } = await clienteAxios.post(`memPool`, file);
                listFilesMemPool.push(file);
@@ -94,10 +106,10 @@ const ArchivosProvider = ({ children }) => {
      const deleteFile = async (id: string) => {
           try {
                await clienteAxios.delete(`memPool/${id}`);
-             //  const filtredData = listFilesMemPool.filter(item => item.id !== id);
+               const filtredData = listFilesMemPool.filter(item => item.id !== id);
                let aid = listFilesMemPool.indexOf(id);
                listFilesMemPool.splice(aid);
-            //   loadFiles(filtredData);
+               loadFiles(filtredData);
                setSizeList(0);
           } catch (error) {
                console.log(error);

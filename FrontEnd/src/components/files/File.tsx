@@ -2,11 +2,15 @@ import useArchivo from '../../hooks/useArchivos';
 import fileDownload from 'js-file-download'
 import { base64StringToBlob } from 'blob-util';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import useAlertas from '../../hooks/useAlertas';
 
 const Configuracion = ({ archivo }) => {
 
 
      const { deleteFile, checkAdd,checkDelete } = useArchivo();
+
+     const { AlertSuccess } = useAlertas();
 
      const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
           if(evt.currentTarget.checked){
@@ -44,10 +48,25 @@ const Configuracion = ({ archivo }) => {
           fileDownload(blob, `${name}.${typeOfFile}`);
      }
 
-     const eliminarArchivo = (id: string) => {
-          // alert(id);
-          deleteFile(id);
-     };
+     const eliminarArchivo = (archivo:any) => 
+        
+         Swal.fire({
+          title: `¿Estas Seguro de eliminar al archivo ${archivo.name}?`,
+          text: `Esta opcion es irreversible`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Cancelar',
+          confirmButtonText: 'Sí, eliminar todos!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+                    deleteFile(archivo.id);
+                    AlertSuccess('Eliminado Correctamente');
+
+          }
+       })
+
      return (
           <tr>
                <td className='text-center'>
@@ -69,7 +88,7 @@ const Configuracion = ({ archivo }) => {
                     <button
                          type="button"
                          className="btn btn-danger"
-                         onClick={() => eliminarArchivo(archivo.id)}>
+                         onClick={() => eliminarArchivo(archivo)}>
                          <i className="fa-solid fa-trash-can"></i>
                     </button>
                </td>

@@ -45,7 +45,7 @@ const Files = () => {
      }
 
      const deletegroup = (aid: string)=>{
-deleteFile(aid);
+           deleteFile(aid);
      }
 
      

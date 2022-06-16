@@ -52,11 +52,11 @@ class Archivo1 {
 export default Archivo1;
 
 
-export interface Archivo {
-  Owner: '';
-  TypeOfFile: '';
-  Date: '';
-  Size: '';
-  Name: '';
-  Base64: '';
-}
+// export default interface Archivo {
+//   Owner: string;
+//   TypeOfFile: string;
+//   Date: string;
+//   Size: string;
+//   Name: string;
+//   Base64: string;
+// }
