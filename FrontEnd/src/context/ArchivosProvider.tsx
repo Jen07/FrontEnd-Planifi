@@ -104,7 +104,7 @@ const ArchivosProvider = ({ children }) => {
           //     loadFiles([...listFilesMemPool]);
               setSizeList(0);
           } catch (error) {
-               console.log(error);
+             //  console.log(error);
           }
      }
 

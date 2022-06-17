@@ -4,6 +4,8 @@ import useArchivos from "../../hooks/useArchivos";
 import { Link, useNavigate } from "react-router-dom";
 import useAlertas from '../../hooks/useAlertas';
 import Alert from "../../Alertas/Alerta";
+import ListFile from '../files/ListFile';
+import shortid from 'shortid';
 
 const Dropzone = () => {
 
@@ -18,6 +20,8 @@ const Dropzone = () => {
      //Obtener contenido de Dropzone
      const onDrop = useCallback((acceptedFiles, fileRejections) => {
      
+
+          console.log(acceptedFiles);
           loadStateInsert(acceptedFiles);
 
           if (listFilesInsert.length > 0) {
@@ -108,7 +112,10 @@ const Dropzone = () => {
                                    Lista de Archivos
                               </li>
                               {(listFilesInsert.map((archivo: any) => (
-                                   <p>{archivo.Name}</p>
+                                   <ListFile
+                                   key={shortid.generate()}
+                                   archivos={archivo}
+                                  / >  
 
                               ))
                               )}

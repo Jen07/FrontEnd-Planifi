@@ -3,9 +3,11 @@ import fileDownload from 'js-file-download'
 import { base64StringToBlob } from 'blob-util';
 import Swal from 'sweetalert2';
 import useAlertas from '../../hooks/useAlertas';
+import { Link, useNavigate } from "react-router-dom";
 
 const Configuracion = ({ archivo }) => {
 
+     const redireccionar = useNavigate();
 
      const { deleteFile, checkAdd, checkDelete, sizeList, isChecked,setIsChecked } = useArchivo();
 
@@ -62,7 +64,6 @@ const Configuracion = ({ archivo }) => {
                if (result.isConfirmed) {
                     deleteFile(archivo.id);
                     AlertSuccess('Eliminado Correctamente');
-
                }
           })
 
@@ -84,6 +85,7 @@ const Configuracion = ({ archivo }) => {
                          onClick={() => descargarArchivo(archivo)}>
                          <i className="fa-solid fa-file-arrow-down"></i>
                     </button>
+                    
                     {sizeList >1? 
                     <button  disabled={true}
                          type="button"
