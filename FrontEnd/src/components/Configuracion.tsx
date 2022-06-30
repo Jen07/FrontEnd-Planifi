@@ -34,7 +34,7 @@ const Configuracion = ({ config }) => {
           }).then((result) => {
                if (result.isConfirmed) {
                     DeleteConfiguration(config.id);
-                    AlertSuccess('Eliminado Correctamente');
+                    AlertSuccess('Eliminado Correctamente','success');
                }
           })
      };
@@ -53,7 +53,7 @@ const Configuracion = ({ config }) => {
                          >
                               <i className="fa-solid fa-pen-to-square"></i>
                          </button>
-                         <button
+                         <button disabled
                               type="button"
                               className="btn btn-danger"
                               onClick={() => confirmarEliminar(config)}

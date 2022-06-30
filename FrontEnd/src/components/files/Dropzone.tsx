@@ -44,7 +44,7 @@ const Dropzone = () => {
                }));
                // listFilesStateInsert(null);
                setListInsert();
-               AlertSuccess('Agregado Correctamente');
+               AlertSuccess('Agregado Correctamente','success');
                redireccionar('/home/Archivos');
           }
      }

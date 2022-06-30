@@ -14,16 +14,17 @@ const AlertasProvider = ({ children }) => {
           Alerta(boleano);
      }
 
-     const AlertSuccess = (mgs) => {
+     const AlertSuccess = (mgs,icon) => {
 
           Swal.fire({
                position: 'top-end',
-               icon: 'success',
+               icon: icon,
                title: mgs,
                showConfirmButton: false,
                timer: 2700
           });
      }
+     
      return (
           <AlertasContext.Provider
                value={{

@@ -1,4 +1,4 @@
-import { Fragment, useEffect,useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/Header';
 import Sidebar from '../sidebar';
@@ -7,13 +7,17 @@ import useArlertas from '../../hooks/useAlertas';
 import File from '../files/File';
 import Swal from 'sweetalert2';
 import { saveAs } from 'file-saver';
+import { RingLoader } from 'react-spinners'
 var zip = require('jszip')();
 
 const Files = () => {
 
-     const { listFilesMemPool, getFiles, sizeList, deleteFile, listFilesCheck, updateState,setListCheck, setIsChecked,isChecked } = useArchivos();
+     const { listFilesMemPool, getFiles, sizeList, deleteFile, listFilesCheck, updateState, setListCheck, minarArchivos,
+          msgDeleteMultipleFile,setMsgDeleteMultipleFile } = useArchivos();
 
      const { AlertSuccess } = useArlertas();
+
+     const [timeLoading, setTimeLoadin] = useState(false);
 
      useEffect(() => {
           getFiles();
@@ -38,11 +42,11 @@ const Files = () => {
                updateState();
           })
           if (sizeList === 0) {
-               AlertSuccess('Archivos eliminados Correctamente');
+               AlertSuccess('Archivos eliminados Correctamente','success');
           }
-          //sizeList == 0 ? AlertSuccess('Archivos eliminados Correctamente'): '';
      }
 
+     
      const deletegroup = (aid: string) => {
           deleteFile(aid);
           setListCheck();
@@ -61,8 +65,26 @@ const Files = () => {
           })
           zip = require('jszip')();
           setListCheck();
-          //setIsChecked(false);
-          //setIsChecked(!isChecked);
+     }
+
+  
+
+     const minar = () =>{
+          setMsgDeleteMultipleFile("");
+
+          minarArchivos();
+           console.log(msgDeleteMultipleFile);
+
+      
+         if(msgDeleteMultipleFile =="1"){
+
+          AlertSuccess('Archivos minados Correctamente','success');
+         }else{
+
+          AlertSuccess('Cantidad de archivos insuficiente, no se puede minar','warning');
+         }
+         setMsgDeleteMultipleFile("");
+
      }
 
 
@@ -71,13 +93,34 @@ const Files = () => {
                <Header />
                <Sidebar />
                <div className="container1 p-5">
+               <div className='sweet-loading'>
+       
+       {/* {timeLoading}
+       <div className="z-index">
+        <RingLoader size={200}
+          color={'#0c2a8e'}
+          className="loader" 
+          loading={timeLoading}
+        />
+        </div> */}
+      </div>
                     <div className='container'>
                          <div className="d-padre m-botton">
                               <div className='d-hijo'>
                                    <Link to={"/home/RegistrarArchivo"}
                                         id="btn__registrarse"
                                         className="btn btn-primary"><i className="fa-solid fa-square-plus fa-2x"></i></Link>
+
+                                   <button onClick={minar}
+                                        id="btn__registrarse"
+                                        className="btn btn-info m-left text-light">
+                                   
+                                   
+                                   <i className="fa-solid fa-link fa-2x"></i>
+                                       <span className="text-center d-flexB">Minar</span> 
+                                   </button>
                               </div>
+
 
                               <div className='d-hijo'>
 

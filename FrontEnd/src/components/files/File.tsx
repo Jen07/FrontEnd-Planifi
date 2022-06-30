@@ -63,7 +63,7 @@ const Configuracion = ({ archivo }) => {
           }).then((result) => {
                if (result.isConfirmed) {
                     deleteFile(archivo.id);
-                    AlertSuccess('Eliminado Correctamente');
+                    AlertSuccess('Eliminado Correctamente','success');
                }
           })
 

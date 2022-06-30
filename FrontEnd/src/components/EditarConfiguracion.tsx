@@ -51,7 +51,7 @@ const EditConfiguracion = () => {
                               <div className='card-body'>
                                    <div className="mb-3">
                                         <label className="form-label">Variable</label>
-                                        <input
+                                        <input disabled
                                              type="variable"
                                              className="form-control"
                                              name='variableSistema'
@@ -92,8 +92,6 @@ const EditConfiguracion = () => {
                          </form>
                     </div>
                </div>
-
-               <Footer />
           </Fragment>
      );
 }

@@ -25,6 +25,8 @@ const ArchivosProvider = ({ children }) => {
 
      const [isChecked, setIsChecked] = useState(false);
 
+     const [msgDeleteMultipleFile, setMsgDeleteMultipleFile] = useState("");
+
      const checkAdd = (aid: string) => {
           listFilesCheck.push(aid);
           setSizeList(listFilesCheck.length);
@@ -97,11 +99,6 @@ const ArchivosProvider = ({ children }) => {
      const deleteFile = async (id: string) => {
           try {
                await clienteAxios.delete(`memPool/${id}`);
-          //     // let aid = listFilesMemPool.indexOf(id);
-          //    //  listFilesMemPool.splice(aid);
-          //      //const newFile = listFilesMemPool.filter(item => item.id !== id);
-          //     //loadFiles(filtredData);
-          //     loadFiles([...listFilesMemPool]);
               setSizeList(0);
           } catch (error) {
              //  console.log(error);
@@ -129,6 +126,20 @@ const ArchivosProvider = ({ children }) => {
      const setListCheck = () =>{
           SetlistFilesStateDelete([]);
      }
+
+     const minarArchivos = async ()=>{
+          try {
+              const {data}  =  (await clienteAxios.get(`Block`));
+              console.log(data);
+
+            setMsgDeleteMultipleFile(data);
+             
+
+          } catch (error) {
+               console.log(error);
+          }
+         
+     }
      return (
           <ArchivosContext.Provider
                value={{
@@ -149,7 +160,12 @@ const ArchivosProvider = ({ children }) => {
                     updateState,
                     setListCheck,
                     setIsChecked,
-                    isChecked
+                    isChecked,
+                    minarArchivos,
+                   msgDeleteMultipleFile,
+                  setMsgDeleteMultipleFile
+
+
                }}
           >
                {children}

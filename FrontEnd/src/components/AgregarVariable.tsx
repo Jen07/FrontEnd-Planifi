@@ -34,7 +34,7 @@ const AgregarVariable = () => {
           setStateAlerta(false);
           //Insertar en mongo
           RegisterConfiguration(config);
-          AlertSuccess('Configuración agregada Correctamente');
+          AlertSuccess('Configuración agregada Correctamente','success');
           redireccionar("/home/Configuraciones");
 
      }
