@@ -68,23 +68,17 @@ const Files = () => {
      }
 
   
+     function myFunction() {
+          setTimeLoadin(true);
+         setTimeout(minar, 7000);
+        }
+
 
      const minar = () =>{
-          setMsgDeleteMultipleFile("");
-
-          minarArchivos();
-           console.log(msgDeleteMultipleFile);
-
-      
-         if(msgDeleteMultipleFile =="1"){
-
-          AlertSuccess('Archivos minados Correctamente','success');
-         }else{
-
-          AlertSuccess('Cantidad de archivos insuficiente, no se puede minar','warning');
-         }
-         setMsgDeleteMultipleFile("");
-
+          minarArchivos().then((resp:any)=>{
+               AlertSuccess(resp.data,'info');
+          });;
+           setTimeLoadin(false);
      }
 
 
@@ -95,14 +89,14 @@ const Files = () => {
                <div className="container1 p-5">
                <div className='sweet-loading'>
        
-       {/* {timeLoading}
-       <div className="z-index">
+       {timeLoading? ( <div className="z-index">
         <RingLoader size={200}
           color={'#0c2a8e'}
           className="loader" 
           loading={timeLoading}
         />
-        </div> */}
+        </div> ):null}
+       
       </div>
                     <div className='container'>
                          <div className="d-padre m-botton">
@@ -111,7 +105,7 @@ const Files = () => {
                                         id="btn__registrarse"
                                         className="btn btn-primary"><i className="fa-solid fa-square-plus fa-2x"></i></Link>
 
-                                   <button onClick={minar}
+                                   <button onClick={myFunction}
                                         id="btn__registrarse"
                                         className="btn btn-info m-left text-light">
                                    

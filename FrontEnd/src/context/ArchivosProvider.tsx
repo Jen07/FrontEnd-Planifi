@@ -25,7 +25,7 @@ const ArchivosProvider = ({ children }) => {
 
      const [isChecked, setIsChecked] = useState(false);
 
-     const [msgDeleteMultipleFile, setMsgDeleteMultipleFile] = useState("");
+     const [msgDeleteMultipleFile, setMsgDeleteMultipleFile] = useState('');
 
      const checkAdd = (aid: string) => {
           listFilesCheck.push(aid);
@@ -129,16 +129,14 @@ const ArchivosProvider = ({ children }) => {
 
      const minarArchivos = async ()=>{
           try {
-              const {data}  =  (await clienteAxios.get(`Block`));
-              console.log(data);
-
-            setMsgDeleteMultipleFile(data);
+              return  await (clienteAxios.get(`Block`));
+             
              
 
           } catch (error) {
                console.log(error);
           }
-         
+  
      }
      return (
           <ArchivosContext.Provider
