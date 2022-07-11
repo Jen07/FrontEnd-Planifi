@@ -39,6 +39,12 @@ const Sidebar = () => {
                                              Archivos
                                         </Link>
                                    </li>
+                                   <li className="nav-item">
+                                        <Link to={"/home/Blocks"} className="nav-link text-light" >
+                                             <span data-feather="users"></span>
+                                             Bloques Minados
+                                        </Link>
+                                   </li>
 
                                    <li className="nav-item">
                                         <li onClick={logout} className="nav-link text-light pointer" >

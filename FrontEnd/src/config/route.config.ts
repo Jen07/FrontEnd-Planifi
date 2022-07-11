@@ -10,6 +10,7 @@ import EditConfiguracion from '../components/EditarConfiguracion';
 
 import Files from '../components/files/Files';
 import FileRegister from '../components/files/FileRegister';
+import Blocks from '../components/Blocks/Blocks';
 
 const routes = [
 
@@ -28,6 +29,8 @@ const routes = [
      { path: '/home/Archivos', componente: Files, exact: true },
 
      { path: '/home/RegistrarArchivo', componente: FileRegister, exact: true },
+
+     { path: '/home/Blocks', componente: Blocks, exact: true },
 
      { path: '*', element: Redireccionar },
 ];

@@ -71,17 +71,11 @@ const ArchivosProvider = ({ children }) => {
                     let name = archivo.name.substring(0, archivo.name.length - 4);
                     let typeOfFile = archivo.path.substring(archivo.path.length, archivo.path.length - getTipoArchivo(archivo.path));
                     let size = archivo.size;
-                    //archivoObj.nombre = nombre;
-                    //archivoObj.archivo = arrayAuxiliar[1];
 
                     listFilesInsert.push(new Archivo1(sessionStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
 
                     listFilesStateInsert([...listFilesInsert]);
-                    // listFilesStateInsert([...listFilesInsert,new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1])]);
-
-                    //   listFilesStateInsert(preState =>[...listFilesInsert,arch]);
-
-                    // listFilesInsert.push(new Archivo1(localStorage.getItem('idUser'), typeOfFile, new Date().toLocaleTimeString(), String(size), name, base64[1]));
+                   
 
                }
           })
