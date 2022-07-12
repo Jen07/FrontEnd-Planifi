@@ -1,32 +1,13 @@
-
 import fileDownload from 'js-file-download'
 import { base64StringToBlob } from 'blob-util';
-
-import useAlertas from '../../hooks/useAlertas';
 import { Link, useNavigate } from "react-router-dom";
-import Header from '../../shared/Header';
-import Sidebar from '../sidebar';
 import { Fragment } from 'react';
-import File from '../files/File';
 import { saveAs } from 'file-saver';
 var zip = require('jszip')();
 
 const Block = ({ block }) => {
 
      const redireccionar = useNavigate();
-
-
-     const descargarEnBloque = (blocks: any) => {
-          blocks.documents.map((file) => {
-               let name = file.name + "." + file.typeOfFile;
-               zip.file(name, file.base64, { base64: true });
-          })
-
-          zip.generateAsync({ type: 'blob' }).then(function (content) {
-               saveAs(content, 'ArchivosBloque.zip')
-          })
-          zip = require('jszip')();
-     }
 
      const descargarArchivo = (file: any) => {
 
@@ -53,12 +34,26 @@ const Block = ({ block }) => {
 
           fileDownload(blob, `${name}.${typeOfFile}`);
      }
+
+     const descargarEnBloque = (blocks: any) => {
+          blocks.documents.map((file) => {
+               let name = file.name + "." + file.typeOfFile;
+               zip.file(name, file.base64, { base64: true });
+          })
+
+          zip.generateAsync({ type: 'blob' }).then(function (content) {
+               saveAs(content, 'ArchivosBloque.zip')
+          })
+          zip = require('jszip')();
+     }
+
      return (
           <Fragment>
                <article className="entrada">
 
-                    <img src="https://d3lkc3n5th01x7.cloudfront.net/wp-content/uploads/2021/08/04022409/WHAT-IS-BLOCKCHAIN.png" alt="logo" />
                     <div className="contenido">
+                    <img src="https://d3lkc3n5th01x7.cloudfront.net/wp-content/uploads/2021/08/04022409/WHAT-IS-BLOCKCHAIN.png" alt="logo" />
+
                          <h3 className='max'></h3>
                          <p>IdBloque Anterior: <span>{block.idBlock}</span></p>
                          <p>MiliSegundos: <span>{block.milliSeconds}</span></p>
@@ -77,31 +72,32 @@ const Block = ({ block }) => {
 
                                    <ul className="list-group">
                                         {/* {block.documents === 0 ? 'No hay Bloques Minados' : (block.documents.map((file: any) => ( */}
-                                             <table className="table table-hover">
-                                                  <thead className="bg-black2 text-light">
-                                                       <tr className="bg-black2 text-light">
-                                                            <th className='text-center' scope="col">Nombre</th>
-                                                            <th className='text-center' scope="col">Tipo</th>
-                                                           
-                                                       </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                       {block.documents.length === 0 ? 'No hay Archivos' : (block.documents.map((file: any) => (
-                                                        <div>
-                                                        <td className='text-center max'>{file.name}</td>
-                                                         <td className='text-center max'>{file.typeOfFile}</td>
-                                                         <td className='text-center'><button
-                                                              className="btn btn-warning text-light m-2"
-                                                              type="button"
-                                                              onClick={() => descargarArchivo(file)}>
-                                                              <i className="fa-solid fa-file-arrow-down"></i>
-                                                         </button>
-                                                         </td>
-                                                         </div>
-                                                       )))}
+                                        <table className="table table-hover">
+                                             <thead className="bg-black2 text-light">
+                                                  <tr className="">
+                                                       <th className='text-center' scope="col">Nombre</th>
+                                                       <th className='text-center' scope="col">Tipo</th>
+                                                       <th className='text-center' scope="col">acción</th>
+                                                  </tr>
+                                             </thead>
+                                             <tbody>
 
-                                                  </tbody>
-                                             </table>
+                                                  {block.documents.length === 0 ? 'No hay Archivos' : (block.documents.map((file: any) => (
+                                                       <tr>
+                                                            <td className='text-center'>{file.name}</td>
+                                                            <td className='text-center'>{file.typeOfFile}</td>
+                                                            <td className='text-center'><button
+                                                                 className="btn btn-warning text-light m-2"
+                                                                 type="button"
+                                                                 onClick={() => descargarArchivo(file)}>
+                                                                 <i className="fa-solid fa-file-arrow-down"></i>
+                                                            </button>
+                                                            </td>
+                                                       </tr>
+                                                  )))}
+
+                                             </tbody>
+                                        </table>
                                    </ul>
                               </div>
                          </div>

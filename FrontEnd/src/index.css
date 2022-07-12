@@ -300,8 +300,9 @@ img{
 .contenido{
     background-color: #ffffff;
     text-align: center;
-    padding: 1rem;
+    padding: 0.1rem;
     text-transform: uppercase;
+    box-shadow: 0 0 0 0.4vmax rgba(0,0,0,.40)
 }
 .contenido span{
     color: #db008b;
@@ -343,9 +344,9 @@ img{
  font-size: 7px;
 }
 .container-block{
-max-width: 1000px;
-margin: 0 auto;
-padding: 10px;
-margin-left: 400px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  margin-left: 400px;
 }
 a{cursor: pointer;}
