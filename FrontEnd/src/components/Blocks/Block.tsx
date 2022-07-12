@@ -52,7 +52,7 @@ const Block = ({ block }) => {
                <article className="entrada">
 
                     <div className="contenido">
-                    <img src="https://d3lkc3n5th01x7.cloudfront.net/wp-content/uploads/2021/08/04022409/WHAT-IS-BLOCKCHAIN.png" alt="logo" />
+                         <img src="https://d3lkc3n5th01x7.cloudfront.net/wp-content/uploads/2021/08/04022409/WHAT-IS-BLOCKCHAIN.png" alt="logo" />
 
                          <h3 className='max'></h3>
                          <p>IdBloque Anterior: <span>{block.idBlock}</span></p>
@@ -71,33 +71,35 @@ const Block = ({ block }) => {
                               <div className="card card-body">
 
                                    <ul className="list-group">
-                                        {/* {block.documents === 0 ? 'No hay Bloques Minados' : (block.documents.map((file: any) => ( */}
-                                        <table className="table table-hover">
-                                             <thead className="bg-black2 text-light">
-                                                  <tr className="">
-                                                       <th className='text-center' scope="col">Nombre</th>
-                                                       <th className='text-center' scope="col">Tipo</th>
-                                                       <th className='text-center' scope="col">acción</th>
-                                                  </tr>
-                                             </thead>
-                                             <tbody>
-
-                                                  {block.documents.length === 0 ? 'No hay Archivos' : (block.documents.map((file: any) => (
-                                                       <tr>
-                                                            <td className='text-center'>{file.name}</td>
-                                                            <td className='text-center'>{file.typeOfFile}</td>
-                                                            <td className='text-center'><button
-                                                                 className="btn btn-warning text-light m-2"
-                                                                 type="button"
-                                                                 onClick={() => descargarArchivo(file)}>
-                                                                 <i className="fa-solid fa-file-arrow-down"></i>
-                                                            </button>
-                                                            </td>
+                                        {(block.length === 0) ? ('No hay archivos Minados') : (
+                                             <table className="table table-hover">
+                                                  <thead className="bg-black2 text-light">
+                                                       <tr className="">
+                                                            <th className='text-center' scope="col">Nombre</th>
+                                                            <th className='text-center' scope="col">Tipo</th>
+                                                            <th className='text-center' scope="col">acción</th>
                                                        </tr>
-                                                  )))}
+                                                  </thead>
+                                                  <tbody>
 
-                                             </tbody>
-                                        </table>
+                                                       {block.documents.length === 0 ? 'No hay Archivos' : (block.documents.map((file: any) => (
+                                                            <tr>
+                                                                 <td className='text-center'>{file.name}</td>
+                                                                 <td className='text-center'>{file.typeOfFile}</td>
+                                                                 <td className='text-center'><button
+                                                                      className="btn btn-warning text-light m-2"
+                                                                      type="button"
+                                                                      onClick={() => descargarArchivo(file)}>
+                                                                      <i className="fa-solid fa-file-arrow-down"></i>
+                                                                 </button>
+                                                                 </td>
+                                                            </tr>
+                                                       )))}
+
+                                                  </tbody>
+                                             </table>
+                                        )}
+
                                    </ul>
                               </div>
                          </div>
